@@ -1,3 +1,7 @@
+package Lista05;
+
+import Lista03.ListaEncadeada;
+
 public class PilhaLista implements Pilha {
     private ListaEncadeada lista;
 
@@ -13,7 +17,7 @@ public class PilhaLista implements Pilha {
         if (estaVazia()) {
             return "A pilha está vazia.";
         }
-        return lista.getPrimeiro().getInfo();
+        return (String) lista.getPrimeiro().getInfo();
     }
 
     public String pop() {

@@ -1,3 +1,5 @@
+package Lista05;
+
 public interface Pilha {
     public void push(String tag);
 

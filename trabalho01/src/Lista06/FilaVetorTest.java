@@ -1,7 +1,5 @@
 package Lista06;
 
-import Lista05.PilhaVaziaException;
-import Lista05.PilhaVetor;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.fail;
