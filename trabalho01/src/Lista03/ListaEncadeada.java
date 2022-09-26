@@ -3,9 +3,11 @@ package Lista03;
 public class ListaEncadeada<T> {
 
     NoLista<T> primeiro;
+    private int tamanho;
 
     public ListaEncadeada() {
         primeiro = null;
+        tamanho = 0;
     }
 
     public NoLista<T> getPrimeiro() {
@@ -19,6 +21,7 @@ public class ListaEncadeada<T> {
         no.setProximo(primeiro);
 
         primeiro = no;
+        tamanho++;
     }
 
     public void retirar(T info) {
@@ -36,20 +39,12 @@ public class ListaEncadeada<T> {
             } else {
                 anterior.setProximo(no.getProximo());
             }
+            tamanho--;
         }
 
     }
 
     public int obterComprimento() {
-
-        int tamanho = 0;
-
-        NoLista<T> no = primeiro;
-
-        while (no != null) {
-            tamanho++;
-            no = no.getProximo();
-        }
         return tamanho;
     }
 

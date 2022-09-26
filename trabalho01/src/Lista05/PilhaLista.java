@@ -15,7 +15,7 @@ public class PilhaLista implements Pilha {
 
     public String peek() {
         if (estaVazia()) {
-            return "A pilha está vazia.";
+            return null;
         }
         return (String) lista.getPrimeiro().getInfo();
     }

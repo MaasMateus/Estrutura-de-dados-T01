@@ -14,6 +14,7 @@ public class Main {
 
 		validador.validarHTML();
 
+		System.out.println(validador.getOcorrenciaTags());
 
 	}
 

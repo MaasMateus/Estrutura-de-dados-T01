@@ -1,8 +1,66 @@
-<html>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo forms</title>
+</head>
 <body>
-<h1>Aqui cabeçalho do arquivo</h1>
-<p>Meu parágrafo da página web.</p>
-<p>Meu segundo parágrafo.</p>
-<a href="http://www.w3schools.com/%22%3EIsto é um link"></a>
+
+<form method="post">
+
+    <p>
+
+    <fieldset>
+        <label for="senha">Login:</label>
+        <input type="text" name="login" placeholder="Entre com o login"><br>
+
+        <label for="senha">Senha:</label>
+        <input type="password" name="senha" placeholder="Entre com a senha" autofocus required><br>
+        <!-- FOUCUS - foco no campo quando reinicia -->
+
+        <label for="professor">É professor?</label>
+        <input type="checkbox" name="professor" id="professor" value="S"><br>
+        <label for="cidade">Cidade:</label>
+
+    </fieldset>
+    <select name="cidade" id="cidade">
+
+        <option value="BNU">Blumenau</option>
+        <option value="GAS">Gaspar</option>
+        <option value="POM">Pomerode</option>
+        <option value="ITA">Itajaí</option>
+
+    </select>
+    <label for="idade1">20 - 30</label>
+    <input type="radio" name="idade" id="idade1" value="1">
+
+    <label for="idade2">31 - 40</label>
+    <input type="radio" name="idade" id="idade2" value="2">
+
+    <label for="idade3">41 - 50</label>
+    <input type="radio" name="idade" id="idade3" value="3">
+
+    <p>
+        <input
+                type="datetime-local" name="data1">
+        <input type="datetime" name="data2">
+        <input type="time" name="data3">
+        <input type="month" name="data4">
+
+    </p>
+
+    <P>
+        <label for="arquivo">Arquivo para enviar:</label>
+        <input type="file" name="arquivo" id="arquivo">
+    </P>
+
+    <input type="submit" value="Enviar informações">
+
+    </p>
+
+</form>
 </body>
 </html>
+</teste>

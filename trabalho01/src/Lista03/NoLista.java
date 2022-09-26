@@ -25,4 +25,8 @@ public class NoLista<T> {
         proximo = no;
     }
 
+    @Override
+    public String toString() {
+        return info.toString();
+    }
 }
