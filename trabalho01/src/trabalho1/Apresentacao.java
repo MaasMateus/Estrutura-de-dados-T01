@@ -20,9 +20,14 @@ import javax.swing.JLabel;
 import java.awt.SystemColor;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
+import Lista03.ListaEncadeada;
+import Lista03.NoLista;
+
 import javax.swing.border.CompoundBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.JScrollPane;
+
 
 public class Apresentacao {
 
@@ -30,7 +35,7 @@ public class Apresentacao {
 	private JTextField textField;
 	private JTable table;
 	private JTextArea textArea;
-
+	private JScrollPane scrollPane;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -71,30 +76,68 @@ public class Apresentacao {
 			textField.setText(archive.getPath());
 			ValidadorHTML validador = new ValidadorHTML(textField.getText());
 			
-			//validador.validarHTML();			
 			
-			String tags = validador.getOcorrenciaTags().toString();
-			//OcorrenciaDeTag ocorrenciaDeTag = new OcorrenciaDeTag(tag);
-
-			String informaçãoTags = "";
-			String somenteTags = "";
-
-			DefaultTableModel model = new DefaultTableModel() {
-				@Override
-				public boolean isCellEditable(final int row, final int column) {
-					return false;
+			// Inicializa a table novamente, para que as informacoes do arquivo anterior não fiquem
+			// aparentes apos a execução de um novo
+			
+			table = new JTable();
+			table.setModel(new DefaultTableModel(
+				new Object[][] {},
+				new String[] {
+					"Tag", "Quantidade"
 				}
-			};
-
-			model.addColumn("Tags");
-			model.addColumn("Número Ocorrências");
-
-			table.setModel(model);
-			textArea.setText(somenteTags);
-			validador.validarHTML();
+			) 
+			
+			{
+				Class[] columnTypes = new Class[] {
+					String.class, Integer.class
+				};
+				public Class getColumnClass(int columnIndex) {
+					return columnTypes[columnIndex];
+				}
+			});
+			
+			scrollPane.setViewportView(table);
+		
+			textArea.setText("");
+			
+			try {
+			
+				ListaEncadeada<OcorrenciaDeTag> tags =  validador.validarHTML();			
+			
+				montarTabela(tags);
+				
+			} catch (SintaxeInvalidaException error) {
+				textArea.setText(error.getMessage());
+				
+			}
+			
 		}
+
+		
 	}
 
+	private void montarTabela(ListaEncadeada<OcorrenciaDeTag> tags) {
+		
+		DefaultTableModel model = (DefaultTableModel) table.getModel();
+		
+		NoLista<OcorrenciaDeTag> no = tags.getPrimeiro();
+		
+		while (no != null) {
+			
+			OcorrenciaDeTag tagAtual = no.getInfo();
+			
+			model.addRow(new Object[] {tagAtual.getTag(), tagAtual.getOcorrencias()});
+			//model.addRow(new Object[] {tagAtual.getTag(), tagAtual.getOcorrencias() });
+			
+			no = no.getProximo();
+		}
+
+		
+		table.setModel(model);
+		
+		
+	}
 	
 	private void jBotaoEscolherMouseClicked(ActionEvent e) throws FileNotFoundException {
 
@@ -147,20 +190,22 @@ public class Apresentacao {
 		textArea.setBounds(23, 67, 604, 176);
 		frame.getContentPane().add(textArea);
 		
-		JScrollPane scrollPane = new JScrollPane();
+		scrollPane = new JScrollPane();
 		scrollPane.setBounds(23, 253, 604, 201);
 		frame.getContentPane().add(scrollPane);
 		
 		table = new JTable();
 		table.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
+			new Object[][] {},
 			new String[] {
-				"Quantidade", "Tag"
+				"Tag", "Quantidade"
 			}
-		) {
+		) 
+		
+		
+		{
 			Class[] columnTypes = new Class[] {
-				Long.class, Object.class
+				String.class, Integer.class
 			};
 			public Class getColumnClass(int columnIndex) {
 				return columnTypes[columnIndex];

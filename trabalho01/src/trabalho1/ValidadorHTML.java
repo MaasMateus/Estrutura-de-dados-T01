@@ -25,7 +25,7 @@ public class ValidadorHTML {
         this.file = new File(path);
     }
 
-    public void validarHTML() throws FileNotFoundException {
+    public ListaEncadeada<OcorrenciaDeTag> validarHTML() throws FileNotFoundException {
 
         Scanner sc = new Scanner(this.file);
 
@@ -95,8 +95,13 @@ public class ValidadorHTML {
         }
 
         if (!pilha.estaVazia()) {
-            throw new SintaxeInvalidaException("Existem tags que foram abertas, mas n√£o foram fechadas");
+            throw new SintaxeInvalidaException("A tag " + pilha.pop() + " foi aberta, porÈm n„o foi fechada.");
+            
+            
         }
+        
+        return ocorrenciaTags;
+        
     }
 
     private void inserirTagPilha(String tag) {
@@ -123,14 +128,14 @@ public class ValidadorHTML {
             throw new SintaxeInvalidaException("A tag " + tag + " foi fechada sem ser aberta - Linha " + indexLinha + " Coluna" + indexColuna);
         }
 
-        if (tagPilha != null) {
-            throw new SintaxeInvalidaException("A tag " + tag + " foi fechada, sem ter sido aberta.");
+        if (tagPilha == null) {
+            throw new SintaxeInvalidaException("A tag " + tag + " foi fechada, sem ter sido aberta. - Linha " + indexLinha + " Coluna" + indexColuna);
         }
 
         if (tagPilha.equals(tag.substring(1))) {
             System.out.println("removida tag " + tag);
         } else {
-        System.out.println("Era esperado o fechamento da tag " + tagPilha + ", por√©m foi encontrado o fechamento da tag " + tag + "- Linha " + indexLinha + " Coluna" + indexColuna);
+        System.out.println("Era esperado o fechamento da tag " + tagPilha + ", porem foi encontrado o fechamento da tag " + tag + "- Linha " + indexLinha + " Coluna" + indexColuna);
             throw new SintaxeInvalidaException("A tag " + tag + " foi fechada ");
         }
     }

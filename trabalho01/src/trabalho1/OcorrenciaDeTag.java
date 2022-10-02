@@ -20,6 +20,10 @@ public class OcorrenciaDeTag {
     public void addOcorrencia() {
         ocorrencias += 1;
     }
+    
+    public int getOcorrencias() {
+    	return ocorrencias;
+    }
 
     @Override
     public String toString() {

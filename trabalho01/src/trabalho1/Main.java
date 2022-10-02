@@ -6,18 +6,18 @@ import java.util.Scanner;
 
 public class Main {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws FileNotFoundException {
 
-		//String path = "C:\\Users\\maasm\\Documents\\Projetos\\Java\\Estrutura-de-dados-T01\\trabalho01\\arquivo.html";
+		String path = "C:\\Users\\maasm\\Documents\\Projetos\\Java\\Estrutura-de-dados-T01\\trabalho01\\arquivo.html";
 
-		//ValidadorHTML validador = new ValidadorHTML(path);
+		ValidadorHTML validador = new ValidadorHTML(path);
 
-		//validador.validarHTML();
+		validador.validarHTML();
 
-		//System.out.println(validador.getOcorrenciaTags());
+		System.out.println(validador.getOcorrenciaTags());
 		
-		Apresentacao arquivo = new Apresentacao();
-		arquivo.frame.setVisible(true);
+//		Apresentacao arquivo = new Apresentacao();
+//		arquivo.frame.setVisible(true);
 
 	}
 
